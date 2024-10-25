@@ -1,14 +1,12 @@
 version: '3'
 
 services:
-  mongo:
+  db:
     image: mongo:5
-    container_name: mongo
     restart: always
     ports:
-      - 27018:27017  # Cambiamos el puerto externo a 27018
+      - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin  # Usuario root
-      MONGO_INITDB_ROOT_PASSWORD: admin  # Contraseña root
+      MONGODB_DATABASE: manage_books
     volumes:
-      - ./mongo-data:/data/db  # Volumen persistente para los datos de la BD
+      - ./mongo:/data/db
