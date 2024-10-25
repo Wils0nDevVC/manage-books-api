@@ -38,7 +38,7 @@ export class AuthorService {
       );
     }
     throw new InternalServerErrorException(
-      `No puede actualizar el pokemon - revise el log`,
+      `No puede actualizar el Author - revise el log`,
     );
   }
 }

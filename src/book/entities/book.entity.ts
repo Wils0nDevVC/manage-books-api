@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 import { Author } from 'src/author/entities/author.entity';
 
 @Schema()
@@ -19,7 +19,8 @@ export class Book extends Document {
   pages: number;
 
   @ApiProperty({ type: [String], description: 'Autores asociados al libro', required: false })
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Author' }] }) 
+  @Prop({ type: [{ type: mongoose.Schema.Types.String, ref: 'Author' }] }) 
+  
   authors: Author[];
 }
 
