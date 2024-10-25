@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -7,17 +11,12 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class AuthorService {
-
   constructor(
     @InjectModel(Author.name)
     private readonly authorModel: Model<Author>,
+  ) {}
 
-  ){
-
-  }
-
-  async create(createAuthorDto: CreateAuthorDto) : Promise<Author>{
-
+  async create(createAuthorDto: CreateAuthorDto): Promise<Author> {
     createAuthorDto.name = createAuthorDto.name.toLocaleLowerCase();
 
     try {
@@ -26,18 +25,11 @@ export class AuthorService {
     } catch (error) {
       this.handleExceptions(error);
     }
-
-
   }
 
-
-  async findAll() :Promise<Author[]> {
-
-    return await this.authorModel.find()
-   
+  async findAll(): Promise<Author[]> {
+    return await this.authorModel.find();
   }
-
-
 
   private handleExceptions(error: any) {
     if (error.code === 11000) {
